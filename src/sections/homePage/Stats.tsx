@@ -11,7 +11,7 @@ interface Statistic {
 }
 
 export default function Stats() {
-  const carCount = useFetch(getCarCount);
+  const carCount = useFetch<number>(getCarCount);
 
   const pageStats: Statistic[] = [
     {
@@ -37,8 +37,11 @@ export default function Stats() {
   ];
   return (
     <div className="py-12 md:py-18 lg:py-20">
-      <SectionContainer className="text-center md:text-left" >
-        <Grid cols={"grid-cols-2 md:grid-cols-4"} gap={"gap-6 md:gap-8 lg:gap-10"}>
+      <SectionContainer className="text-center md:text-left">
+        <Grid
+          cols={"grid-cols-2 md:grid-cols-4"}
+          gap={"gap-6 md:gap-8 lg:gap-10"}
+        >
           {pageStats.map((stat) => (
             <Stat key={stat.id} stat={stat} />
           ))}

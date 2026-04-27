@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-export const useFetch = (fetchFn) => {
-  const [data, setData] = useState(null);
+export const useFetch = <T>(fetchFn: () => Promise<T>) => {
+  const [data, setData] = useState<T | null>(null)
 
   useEffect(() => {
-    fetchFn()
-      .then(setData)
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+    fetchFn().then(setData)
+  }, [fetchFn])
 
-  return data;
-};
+  return data
+}
