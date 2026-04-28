@@ -8,8 +8,8 @@ export const getCarCount = async (): Promise<number> => {
   return count ?? 0;
 };
 
-export const getCars = async (): Promise<Car[]> => {
-  const { data, error } = await supabase.from("cars").select("*");
+export const getCars = async (limit?: number): Promise<Car[]> => {
+  const { data, error } = await supabase.from("cars").select("*").limit(limit);
 
   if (error) {
     console.error(error);

@@ -9,5 +9,6 @@ export type Car = {
   image_url: string;
   body_type: string;
   fuel_type: string;
+  price: number;
   isActive?: boolean;
 };
