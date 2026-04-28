@@ -3,7 +3,7 @@ import SectionContainer from "../../components/shared/SectionContainer";
 import Grid from "../../components/shared/Grid";
 import CarFilterButton from "../../components/homePage/CarFilterButton";
 import { useFetch } from "../../hooks/useFetch";
-import { getCars} from "../../api/cars";
+import { getCars } from "../../api/cars";
 import type { Car } from "../../types/car";
 import CarCard from "../../components/homePage/CarCard";
 import PrimaryButton from "../../components/shared/PrimaryButton";
@@ -36,7 +36,7 @@ export default function CarsLibrary() {
   const hasMore = filteredCars.length > INITIAL_LIMIT;
 
   return (
-    <div className="py-15 md:py-20 lg:py-25">
+    <div className="py-15 md:py-20 lg:py-25" id="offer">
       <SectionContainer>
         <div>
           <Grid cols="grid-cols-1 md:grid-cols-2">
