@@ -3,7 +3,7 @@ import SectionContainer from "../../components/shared/SectionContainer";
 import Grid from "../../components/shared/Grid";
 import CarFilterButton from "../../components/homePage/CarFilterButton";
 import { useFetch } from "../../hooks/useFetch";
-import { getCars, getCarCount } from "../../api/cars";
+import { getCars} from "../../api/cars";
 import type { Car } from "../../types/car";
 import CarCard from "../../components/homePage/CarCard";
 import PrimaryButton from "../../components/shared/PrimaryButton";

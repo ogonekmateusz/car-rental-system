@@ -9,7 +9,13 @@ export const getCarCount = async (): Promise<number> => {
 };
 
 export const getCars = async (limit?: number): Promise<Car[]> => {
-  const { data, error } = await supabase.from("cars").select("*").limit(limit);
+  let query = supabase.from("cars").select("*");
+
+  if (typeof limit === "number") {
+    query = query.limit(limit);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
