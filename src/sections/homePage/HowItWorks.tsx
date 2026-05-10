@@ -1,3 +1,4 @@
+import HowItWorksSteps from "../../components/homePage/HowItWorksSteps";
 import SectionContainer from "../../components/shared/SectionContainer";
 
 export default function HowItWorks() {
@@ -7,6 +8,7 @@ export default function HowItWorks() {
         <h3 className="text-4xl md:text-5xl font-medium md:font-semibold text-center">
           Prosta Droga do Luksusu
         </h3>
+        <HowItWorksSteps />
       </SectionContainer>
     </div>
   );
