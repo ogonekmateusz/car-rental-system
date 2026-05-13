@@ -29,7 +29,7 @@ export default function OrderPage() {
         <section className="py-16 flex-1">
           <div className="flex flex-col gap-12 lg:flex-row  lg:gap-40">
             <div className="w-full max-w-[700px]">
-              <OrderForm setNumberOfDays={setNumberOfDays} />
+              <OrderForm setNumberOfDays={setNumberOfDays} carId={car.id} />
             </div>
 
             <div className="w-full flex justify-center lg:justify-end lg:max-w-[420px]">

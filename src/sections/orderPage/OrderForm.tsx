@@ -3,11 +3,14 @@ import FormSection from "../../components/orderPage/FormSection";
 import Grid from "../../components/shared/Grid";
 import PrimaryButton from "../../components/shared/PrimaryButton";
 import { useEffect, useState } from "react";
+import { rentCar } from "../../api/cars.ts";
 
 export default function OrderForm({
+  carId,
   setNumberOfDays,
 }: {
   setNumberOfDays: (days: number) => void;
+  carId: number;
 }) {
   const [form, setForm] = useState({
     name: "",
@@ -46,36 +49,85 @@ export default function OrderForm({
     return null;
   };
 
-  useEffect(() => {
-    if (form.rentStartDate && form.rentEndDate) {
-      const validationError = validateDates(
-        form.rentStartDate,
-        form.rentEndDate,
-      );
-
-      if (validationError) {
-        setError(validationError);
-        return;
-      }
-
-      setError(null);
-
-      const startDate = new Date(form.rentStartDate);
-      const endDate = new Date(form.rentEndDate);
-
-      const diff = endDate.getTime() - startDate.getTime();
-      const days = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-
-      setNumberOfDays(days);
+  const validateForm = () => {
+    if (!form.name.trim()) {
+      return "Podaj imię i nazwisko";
     }
+
+    if (!form.phone.trim()) {
+      return "Podaj numer telefonu";
+    }
+
+    if (!form.email.trim()) {
+      return "Podaj adres email";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(form.email)) {
+      return "Niepoprawny adres email";
+    }
+
+    const phoneRegex = /^[0-9+\s-]{7,20}$/;
+
+    if (!phoneRegex.test(form.phone)) {
+      return "Niepoprawny numer telefonu";
+    }
+
+    if (!form.rentStartDate) {
+      return "Wybierz datę odbioru";
+    }
+
+    if (!form.rentEndDate) {
+      return "Wybierz datę zwrotu";
+    }
+
+    return validateDates(form.rentStartDate, form.rentEndDate);
+  };
+
+  useEffect(() => {
+    if (!form.rentStartDate || !form.rentEndDate) return;
+
+    const startDate = new Date(form.rentStartDate);
+    const endDate = new Date(form.rentEndDate);
+
+    const diff = endDate.getTime() - startDate.getTime();
+
+    const days = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+
+    setNumberOfDays(days);
   }, [form.rentStartDate, form.rentEndDate, setNumberOfDays]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleRent = async () => {
+    const validationError = validateForm();
 
-    if (error) return;
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
 
-    console.log("FORM:", form);
+    setError(null);
+
+    await rentCar({
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      carId,
+      dateFrom: form.rentStartDate,
+      dateTo: form.rentEndDate,
+    });
+
+    alert("Samochód został wynajęty 🚗");
+
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      rentStartDate: "",
+      rentEndDate: "",
+    });
+
+    setNumberOfDays(1);
   };
 
   return (
@@ -90,14 +142,13 @@ export default function OrderForm({
         </p>
       </div>
 
-      {/* ERROR */}
       {error && (
         <div className="mt-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm">
           {error}
         </div>
       )}
 
-      <form className="mt-10 space-y-10" onSubmit={handleSubmit}>
+      <form className="mt-10 space-y-10" onSubmit={(e) => e.preventDefault()}>
         <FormSection title="DANE OSOBOWE">
           <FormField
             title="Imię i Nazwisko"
@@ -149,9 +200,15 @@ export default function OrderForm({
         </FormSection>
 
         <PrimaryButton
-          onClick={() => {}}
-          className="bg-blue-600 w-full shadow-sm py-3 md:py-2 lg:w-fit"
-          disabled={!!error}
+          onClick={handleRent}
+          className="bg-blue-600 w-full shadow-sm py-3 md:py-2 lg:w-fit disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70"
+          disabled={
+            !form.name ||
+            !form.email ||
+            !form.phone ||
+            !form.rentStartDate ||
+            !form.rentEndDate
+          }
         >
           POTWIERDŹ WYNAJEM
         </PrimaryButton>
