@@ -40,25 +40,41 @@ export const rentCar = async ({
   dateFrom: string;
   dateTo: string;
 }) => {
-  // 1. Tworzenie klienta
-  const { data: client, error: clientError } = await supabase
+  // 1. Szukamy klienta po emailu
+  const { data: existingClient } = await supabase
     .from("clients")
-    .insert({
-      name,
-      email,
-      phone,
-    })
-    .select()
+    .select("*")
+    .eq("email", email)
     .single();
 
-  if (clientError) {
-    console.error("Client error:", clientError);
-    return;
+  let clientId: number;
+
+  // 2. Jeśli istnieje -> użyj istniejącego
+  if (existingClient) {
+    clientId = existingClient.id;
+  } else {
+    // 3. Jeśli nie istnieje -> stwórz nowego
+    const { data: client, error: clientError } = await supabase
+      .from("clients")
+      .insert({
+        name,
+        email,
+        phone,
+      })
+      .select()
+      .single();
+
+    if (clientError) {
+      console.error("Client error:", clientError);
+      return;
+    }
+
+    clientId = client.id;
   }
 
-  // 2. Dodanie wynajmu
+  // 4. Dodanie wynajmu
   const { error: rentalError } = await supabase.from("rentals").insert({
-    client_id: client.id,
+    client_id: clientId,
     car_id: carId,
     date_from: dateFrom,
     date_to: dateTo,
@@ -69,7 +85,7 @@ export const rentCar = async ({
     return;
   }
 
-  // 3. Update auta
+  // 5. Oznaczenie auta jako wynajęte
   const { error: carError } = await supabase
     .from("cars")
     .update({
