@@ -4,6 +4,7 @@ import Grid from "../../components/shared/Grid";
 import PrimaryButton from "../../components/shared/PrimaryButton";
 import { useEffect, useState } from "react";
 import { rentCar } from "../../api/cars.ts";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderForm({
   carId,
@@ -19,7 +20,7 @@ export default function OrderForm({
     rentStartDate: "",
     rentEndDate: "",
   });
-
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,8 +118,6 @@ export default function OrderForm({
       dateTo: form.rentEndDate,
     });
 
-    alert("Samochód został wynajęty 🚗");
-
     setForm({
       name: "",
       email: "",
@@ -128,6 +127,7 @@ export default function OrderForm({
     });
 
     setNumberOfDays(1);
+    navigate("/sukces");
   };
 
   return (
@@ -201,7 +201,7 @@ export default function OrderForm({
 
         <PrimaryButton
           onClick={handleRent}
-          className="bg-blue-600 w-full shadow-sm py-3 md:py-2 lg:w-fit disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70"
+          className="bg-blue-600 w-full shadow-sm py-3 md:py-2 lg:w-fit disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70 "
           disabled={
             !form.name ||
             !form.email ||

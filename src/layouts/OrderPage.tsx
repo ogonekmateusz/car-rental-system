@@ -6,7 +6,7 @@ import type { Car } from "../types/car.ts";
 import Summary from "../sections/orderPage/Summary.tsx";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import EmptyStatePage from "./EmptyStatePage.tsx";
+import StatePage from "./StatePage.tsx";
 
 export default function OrderPage() {
   const [numberOfDays, setNumberOfDays] = useState(1);
@@ -15,7 +15,7 @@ export default function OrderPage() {
 
   if (!car) {
     return (
-      <EmptyStatePage
+      <StatePage
         title="Samochód nie został wybrany"
         description="Aby kontynuować, wybierz pojazd z listy dostępnych samochodów."
       />
@@ -28,7 +28,7 @@ export default function OrderPage() {
       <SectionContainer>
         <section className="py-16 flex-1">
           <div className="flex flex-col gap-12 lg:flex-row  lg:gap-40">
-            <div className="w-full max-w-[700px]">
+            <div className="w-full max-w-175">
               <OrderForm setNumberOfDays={setNumberOfDays} carId={car.id} />
             </div>
 

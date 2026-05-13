@@ -9,7 +9,7 @@ type EmptyStatePageProps = {
   showLogo?: boolean;
 };
 
-export default function EmptyStatePage({
+export default function StatePage({
   title,
   description,
   linkTo = "/",
