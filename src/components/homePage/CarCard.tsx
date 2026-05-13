@@ -1,7 +1,15 @@
 import type { Car } from "../../types/car";
 import PrimaryButton from "../shared/PrimaryButton";
+import {useNavigate} from "react-router-dom";
 
 export default function CarCard({ car }: { car: Car }) {
+  const navigate = useNavigate();
+
+  const handleOrder = () => {
+    navigate("rezerwacja", {
+      state: { car },
+    });
+  };
   return (
     <div
       className={`relative bg-white shadow-sm border overflow-hidden ${
@@ -61,7 +69,7 @@ export default function CarCard({ car }: { car: Car }) {
             Pojazd aktualnie wypożyczony
           </div>
         ) : (
-          <PrimaryButton className="mt-7" onClick={() => {}}>
+          <PrimaryButton className="mt-7" onClick={handleOrder}>
             WYPOŻYCZ TERAZ
           </PrimaryButton>
         )}
