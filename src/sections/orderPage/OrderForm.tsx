@@ -6,7 +6,7 @@ import PrimaryButton from "../../components/shared/PrimaryButton";
 
 export default function OrderForm() {
   return (
-    <section className="py-10 md:py-15 lg:py-20">
+    <section>
         <div className="space-y-3">
           <h3 className="text-4xl lg:text-5xl font-semibold leading-tight text-center lg:text-left">
             Wynajmij swój pojazd
