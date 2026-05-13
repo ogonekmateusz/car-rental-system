@@ -3,12 +3,10 @@ import FormSection from "../../components/orderPage/FormSection";
 
 import Grid from "../../components/shared/Grid";
 import PrimaryButton from "../../components/shared/PrimaryButton";
-import SectionContainer from "../../components/shared/SectionContainer";
 
 export default function OrderForm() {
   return (
     <section className="py-10 md:py-15 lg:py-20">
-      <SectionContainer>
         <div className="space-y-3">
           <h3 className="text-4xl lg:text-5xl font-semibold leading-tight text-center lg:text-left">
             Wynajmij swój pojazd
@@ -47,13 +45,12 @@ export default function OrderForm() {
             </Grid>
           </FormSection>
           <PrimaryButton
-            className="bg-blue-600 w-full shadow-sm py-3 md:py-2 md:w-fit"
+            className="bg-blue-600 w-full shadow-sm py-3 md:py-2 lg:w-fit"
             onClick={() => {}}
           >
             POTWIERDŹ WYNAJEM
           </PrimaryButton>
         </form>
-      </SectionContainer>
     </section>
   );
 }
