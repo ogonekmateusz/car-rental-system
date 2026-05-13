@@ -1,12 +1,12 @@
-import Navbar from "../../components/homePage/Navbar.tsx";
-import OrderForm from "../../sections/orderPage/OrderForm.tsx";
-import Footer from "../../sections/homePage/Footer.tsx";
-import SectionContainer from "../../components/shared/SectionContainer.tsx";
-import type { Car } from "../../types/car.ts";
-import Summary from "../../sections/orderPage/Summary.tsx";
+import Navbar from "../components/homePage/Navbar.tsx";
+import OrderForm from "../sections/orderPage/OrderForm.tsx";
+import Footer from "../sections/homePage/Footer.tsx";
+import SectionContainer from "../components/shared/SectionContainer.tsx";
+import type { Car } from "../types/car.ts";
+import Summary from "../sections/orderPage/Summary.tsx";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import CarNotSelected from "./CarNotSelected.tsx";
+import EmptyStatePage from "./EmptyStatePage.tsx";
 
 export default function OrderPage() {
   const [numberOfDays, setNumberOfDays] = useState(1);
@@ -14,7 +14,12 @@ export default function OrderPage() {
   const car = location.state?.car as Car;
 
   if (!car) {
-    return <CarNotSelected />;
+    return (
+      <EmptyStatePage
+        title="Samochód nie został wybrany"
+        description="Aby kontynuować, wybierz pojazd z listy dostępnych samochodów."
+      />
+    );
   }
 
   return (
