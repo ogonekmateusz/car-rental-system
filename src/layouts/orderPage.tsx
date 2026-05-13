@@ -5,8 +5,10 @@ import SectionContainer from "../components/shared/SectionContainer.tsx";
 import type { Car } from "../types/car.ts";
 import Summary from "../sections/orderPage/Summary.tsx";
 import { useLocation } from "react-router-dom";
+import {useState} from "react";
 
 export default function OrderPage() {
+    const [numberOfDays, setNumberOfDays] = useState(1);
     const location = useLocation();
     const car = location.state?.car as Car;
 
@@ -21,11 +23,11 @@ export default function OrderPage() {
                 <section className="py-16 flex-1">
                     <div className="flex flex-col gap-12 lg:flex-row  lg:gap-40">
                             <div className="w-full max-w-[700px]">
-                                <OrderForm />
+                                <OrderForm setNumberOfDays={setNumberOfDays}/>
                             </div>
 
                             <div className="w-full flex justify-center lg:justify-end lg:max-w-[420px]">
-                                <Summary car={car} />
+                                <Summary car={car} numberOfDays={numberOfDays} />
                             </div>
                         </div>
                 </section>

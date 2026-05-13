@@ -2,13 +2,19 @@ import InputLabel from "./InputLabel";
 
 interface FormFieldProps {
   title: string;
-  type?: string;
+  name: string;
+  type?: "text" | "email" | "tel" | "date" | "password";
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
 
 export default function FormField({
   title,
+  name,
   type = "text",
+  value,
+  onChange,
   placeholder,
 }: FormFieldProps) {
   return (
@@ -16,9 +22,19 @@ export default function FormField({
       <InputLabel title={title} />
 
       <input
+        name={name}
         type={type}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
-        className="border-b w-full py-2 outline-none border-gray-300 focus:border-black transition-colors"
+        className="
+          w-full
+          py-2
+          border-b border-gray-300
+          outline-none
+          transition-colors
+          focus:border-black
+        "
       />
     </div>
   );
