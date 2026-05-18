@@ -1,4 +1,4 @@
-import InputLabel from "./InputLabel";
+import InputLabel from "../orderPage/InputLabel";
 
 interface FormFieldProps {
   title: string;
