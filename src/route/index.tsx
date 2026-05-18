@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from "../layouts/HomePage";
-import AdminPage from "../layouts/AdminPage";
-import OrderPage from "../layouts/OrderPage.tsx";
-import StatePage from "../layouts/StatePage.tsx";
+import HomePage from "../pages/HomePage";
+import AdminPage from "../pages/AdminPage";
+import OrderPage from "../pages/OrderPage.tsx";
+import StatePage from "../pages/StatePage.tsx";
+import AdminLoginPage from "../pages/AdminLoginPage.tsx";
 
 export default function Router() {
   return (
@@ -35,6 +36,7 @@ export default function Router() {
             />
           }
         />
+        <Route path="login" element={<AdminLoginPage />} />
       </Routes>
     </BrowserRouter>
   );
