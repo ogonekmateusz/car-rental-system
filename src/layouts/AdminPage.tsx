@@ -3,7 +3,7 @@ import Sidebar from "../components/adminPage/Sidebar";
 
 export default function adminPage() {
   return (
-    <section>
+    <section className="flex bg-gray-50">
       <Sidebar />
       <div>
         <Outlet />
