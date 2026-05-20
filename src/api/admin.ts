@@ -14,6 +14,7 @@ export const loginUser = async ({
   });
 
   if (error) throw error;
+
   return data.user as User;
 };
 
