@@ -10,8 +10,17 @@ import PrimaryButton from "../shared/PrimaryButton";
 import SideBarItemComponent from "./SideBarItem";
 import Logo from "../shared/Logo";
 
+import { logoutUser } from "../../api/admin.ts";
+import { useNavigate } from "react-router-dom";
+
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const logOutUser = async () => {
+    logoutUser();
+    navigate("/");
+  };
 
   const sideBarItems: SideBarItem[] = [
     {
@@ -118,7 +127,7 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <PrimaryButton onClick={() => {}}>Wyloguj się</PrimaryButton>
+        <PrimaryButton onClick={logOutUser}>Wyloguj się</PrimaryButton>
       </aside>
     </>
   );

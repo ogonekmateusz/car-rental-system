@@ -34,7 +34,9 @@ export default function AdminLoginPage() {
         password: form.password,
       });
 
-      if (user) navigate("/admin");
+      if (user) {
+        window.location.href = "/admin";
+      }
     } catch {
       setError("Nieprawidłowy email lub hasło");
     } finally {

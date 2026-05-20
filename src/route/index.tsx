@@ -31,7 +31,12 @@ export default function Router() {
         <Route path="/" element={<HomePage />} />
         <Route path="/rezerwacja" element={<OrderPage />} />
 
-        <Route path="/login" element={<AdminLoginPage />} />
+        <Route
+          path="/login"
+          element={
+            session ? <Navigate to="/admin" replace /> : <AdminLoginPage />
+          }
+        />
 
         <Route
           path="/sukces"
