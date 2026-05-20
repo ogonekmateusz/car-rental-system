@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import Sidebar from "../components/adminPage/Sidebar";
 
 export default function adminPage() {
   return (
     <section>
-      <div className="sideBar">side</div>
+      <Sidebar />
       <div>
         <Outlet />
       </div>
