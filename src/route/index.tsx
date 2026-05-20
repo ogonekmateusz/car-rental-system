@@ -35,6 +35,11 @@ export default function Router() {
             />
           }
         />
+
+        <Route path="/admin" element={<AdminPage />}>
+          <Route path="panel" element={<div>panel</div>} />
+          <Route path="flota" element={<div>flota</div>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

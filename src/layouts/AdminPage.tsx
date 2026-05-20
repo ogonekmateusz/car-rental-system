@@ -1,5 +1,12 @@
+import { Outlet } from "react-router-dom";
+
 export default function adminPage() {
   return (
-    <div>adminPage</div>
-  )
+    <section>
+      <div className="sideBar">side</div>
+      <div>
+        <Outlet />
+      </div>
+    </section>
+  );
 }
