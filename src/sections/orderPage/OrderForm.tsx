@@ -1,4 +1,4 @@
-import FormField from "../../components/orderPage/FormField";
+import FormField from "../../components/shared/FormField";
 import FormSection from "../../components/orderPage/FormSection";
 import Grid from "../../components/shared/Grid";
 import PrimaryButton from "../../components/shared/PrimaryButton";
