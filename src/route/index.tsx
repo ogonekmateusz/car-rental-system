@@ -31,11 +31,6 @@ export default function Router() {
         <Route path="/" element={<HomePage />} />
         <Route path="/rezerwacja" element={<OrderPage />} />
 
-        <Route
-          path="/admin"
-          element={session ? <AdminPage /> : <Navigate to="/login" replace />}
-        />
-
         <Route path="/login" element={<AdminLoginPage />} />
 
         <Route
@@ -62,9 +57,14 @@ export default function Router() {
           }
         />
 
-        <Route path="/admin" element={<AdminPage />}>
-          <Route path="panel" element={<div>panel</div>} />
+        <Route
+          path="/admin"
+          element={session ? <AdminPage /> : <Navigate to="/login" replace />}
+        >
+          <Route index element={<div>dashboard</div>} />
           <Route path="flota" element={<div>flota</div>} />
+          <Route path="wynajmy" element={<div>wynajmy</div>} />
+          <Route path="ustawienia" element={<div>Ustawienia</div>} />
         </Route>
       </Routes>
     </BrowserRouter>

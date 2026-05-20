@@ -16,31 +16,27 @@ export default function Sidebar() {
   const sideBarItems: SideBarItem[] = [
     {
       id: 1,
-      name: "Dashboard",
+      name: "Panel",
       icon: <MdOutlineDashboard />,
-      href: "",
-      active: true,
+      href: "/admin",
     },
     {
       id: 2,
       name: "Flota",
       icon: <FaCar />,
-      href: "",
-      active: false,
+      href: "/admin/flota",
     },
     {
       id: 3,
       name: "Wynajmy",
       icon: <CiCalendar />,
-      href: "",
-      active: false,
+      href: "/admin/wynajmy",
     },
     {
       id: 4,
       name: "Ustawienia",
       icon: <CiSettings />,
-      href: "",
-      active: false,
+      href: "/admin/ustawienia",
     },
   ];
 
