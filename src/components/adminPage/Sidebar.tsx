@@ -48,13 +48,13 @@ export default function Sidebar() {
     <>
       {/* MOBILE TOPBAR */}
       <div className="md:hidden sticky top-0 z-40 flex items-center justify-between border-b border-zinc-200 bg-white/80 backdrop-blur-md px-4 py-4">
+        <Logo size={"text-2xl"} />
         <button
           onClick={() => setIsOpen(true)}
           className="rounded-xl p-2 transition hover:bg-zinc-100"
         >
           <FaBars className="text-2xl text-black" />
         </button>
-
       </div>
 
       {/* OVERLAY */}
