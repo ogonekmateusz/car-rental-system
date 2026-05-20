@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import HomePage from "../pages/HomePage";
 import AdminPage from "../pages/AdminPage";
@@ -6,13 +6,38 @@ import OrderPage from "../pages/OrderPage.tsx";
 import StatePage from "../pages/StatePage.tsx";
 import AdminLoginPage from "../pages/AdminLoginPage.tsx";
 
+import { getUserSession } from "../api/admin.ts";
+import { useEffect, useState } from "react";
+
 export default function Router() {
+  const [session, setSession] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const run = async () => {
+      const s = await getUserSession();
+      setSession(s);
+      setLoading(false);
+    };
+
+    run();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/rezerwacja" element={<OrderPage />} />
-        <Route path="/admin" element={<AdminPage />} />
+
+        <Route
+          path="/admin"
+          element={session ? <AdminPage /> : <Navigate to="/login" replace />}
+        />
+
+        <Route path="/login" element={<AdminLoginPage />} />
+
         <Route
           path="/sukces"
           element={
@@ -36,7 +61,6 @@ export default function Router() {
             />
           }
         />
-        <Route path="login" element={<AdminLoginPage />} />
       </Routes>
     </BrowserRouter>
   );
