@@ -3,7 +3,7 @@ import Logo from "../components/shared/Logo";
 
 type EmptyStatePageProps = {
   title: string;
-  description: string;
+  description?: string;
   linkTo?: string;
   linkLabel?: string;
   showLogo?: boolean;
@@ -27,16 +27,20 @@ export default function StatePage({
           {title}
         </h1>
 
-        <p className="text-white/60 text-sm md:text-base leading-relaxed">
-          {description}
-        </p>
+        {description && (
+          <p className="text-white/60 text-sm md:text-base leading-relaxed">
+            {description}
+          </p>
+        )}
 
-        <Link
-          to={linkTo}
-          className="text-white/70 hover:text-white transition-colors duration-200 underline underline-offset-4 decoration-white/20 hover:decoration-white"
-        >
-          {linkLabel}
-        </Link>
+        {linkTo && linkLabel && (
+          <Link
+            to={linkTo}
+            className="text-white/70 hover:text-white transition-colors duration-200 underline underline-offset-4 decoration-white/20 hover:decoration-white"
+          >
+            {linkLabel}
+          </Link>
+        )}
       </div>
     </section>
   );

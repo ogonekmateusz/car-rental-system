@@ -8,6 +8,7 @@ import AdminLoginPage from "../pages/AdminLoginPage.tsx";
 
 import { getUserSession } from "../api/admin.ts";
 import { useEffect, useState } from "react";
+import Cars from "../sections/adminPage/Cars.tsx";
 
 export default function Router() {
   const [session, setSession] = useState<any>(null);
@@ -67,7 +68,7 @@ export default function Router() {
           element={session ? <AdminPage /> : <Navigate to="/login" replace />}
         >
           <Route index element={<div>dashboard</div>} />
-          <Route path="flota" element={<div>flota</div>} />
+          <Route path="flota" element={<Cars />} />
           <Route path="wynajmy" element={<div>wynajmy</div>} />
           <Route path="ustawienia" element={<div>Ustawienia</div>} />
         </Route>
