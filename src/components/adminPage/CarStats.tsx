@@ -30,7 +30,7 @@ export default function CarStats({ stats }: CarStatsProps) {
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon }) => {
   return (
-    <div className="w-full bg-white border border-gray-100 rounded-lg shadow-sm p-6 flex flex-col gap-4">
+    <div className="w-full bg-white border border-gray-50 rounded-lg shadow-sm p-6 flex flex-col gap-4">
       {icon && (
         <div className="text-blue-600 text-2xl" aria-hidden="true">
           {icon}

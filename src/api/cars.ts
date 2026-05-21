@@ -1,5 +1,6 @@
 import { supabase } from "../utils/supabase";
 import type { Car } from "../types/car";
+
 export const getCarCount = async (): Promise<number> => {
   const { count } = await supabase
     .from("cars")
@@ -40,7 +41,6 @@ export const rentCar = async ({
   dateFrom: string;
   dateTo: string;
 }) => {
-  // 1. Szukamy klienta po emailu
   const { data: existingClient } = await supabase
     .from("clients")
     .select("*")
@@ -49,18 +49,12 @@ export const rentCar = async ({
 
   let clientId: number;
 
-  // 2. Jeśli istnieje -> użyj istniejącego
   if (existingClient) {
     clientId = existingClient.id;
   } else {
-    // 3. Jeśli nie istnieje -> stwórz nowego
     const { data: client, error: clientError } = await supabase
       .from("clients")
-      .insert({
-        name,
-        email,
-        phone,
-      })
+      .insert({ name, email, phone })
       .select()
       .single();
 
@@ -72,7 +66,6 @@ export const rentCar = async ({
     clientId = client.id;
   }
 
-  // 4. Dodanie wynajmu
   const { error: rentalError } = await supabase.from("rentals").insert({
     client_id: clientId,
     car_id: carId,
@@ -85,15 +78,35 @@ export const rentCar = async ({
     return;
   }
 
-  // 5. Oznaczenie auta jako wynajęte
   const { error: carError } = await supabase
     .from("cars")
-    .update({
-      is_rented: true,
-    })
+    .update({ is_rented: true })
     .eq("id", carId);
 
   if (carError) {
     console.error("Car update error:", carError);
   }
+};
+
+export const returnCar = async (carId: number): Promise<boolean> => {
+  const { error } = await supabase
+    .from("cars")
+    .update({ is_rented: false })
+    .eq("id", carId);
+
+  if (error) {
+    console.error("Błąd podczas zwrotu auta:", error);
+    return false;
+  }
+  return true;
+};
+
+export const deleteCar = async (carId: number): Promise<boolean> => {
+  const { error } = await supabase.from("cars").delete().eq("id", carId);
+
+  if (error) {
+    console.error("Błąd podczas usuwania samochodu:", error);
+    return false;
+  }
+  return true;
 };
