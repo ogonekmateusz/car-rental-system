@@ -18,12 +18,12 @@ export default function AdminPanelSection({
   sectionHeadingOnClick,
 }: AdminPanelSectionProps) {
   return (
-    <section className="w-full py-6">
+    <section className="w-full py-6 md:py-12">
       <SectionContainer>
-        <header className="mb-8 flex flex-col gap-5 md:flex-row md:justify-between md:gap-8">
+        <header className="mb-8 flex flex-col lg:items-center gap-5 lg:flex-row lg:justify-between md:gap-8">
           <div>
             {topText && (
-              <span className="mb-2 block text-[11px] font-bold uppercase tracking-widest text-blue-600">
+              <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-blue-600">
                 {topText}
               </span>
             )}
