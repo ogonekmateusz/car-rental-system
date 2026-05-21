@@ -3,6 +3,7 @@ import AdminPanelSection from "../../components/shared/AdminPanelSection.tsx";
 import CarStats from "../../components/adminPage/CarStats.tsx";
 import CarTableFilters from "../../components/adminPage/CarTable/CarTableFilters.tsx";
 import CarTable from "../../components/adminPage/CarTable/CarTable.tsx";
+import AddCarModal from "../../components/adminPage/AddCarModal.tsx"; // <-- Nowy import
 import { useFetch } from "../../hooks/useFetch.ts";
 import { getCars } from "../../api/cars.ts";
 import type { Car } from "../../types/car.ts";
@@ -17,6 +18,7 @@ export default function Cars() {
   const [refreshKey, setRefreshKey] = useState(0);
   const cars = useFetch<Car[]>(getCars, [refreshKey]) ?? [];
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // <-- Stan otwarcia modala
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBodyType, setSelectedBodyType] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -87,7 +89,7 @@ export default function Cars() {
     <AdminPanelSection
       header={"Zarządzanie Flotą"}
       sectionHeadingButtonTitle={"+ DODAJ NOWY SAMOCHÓD"}
-      sectionHeadingOnClick={() => {}}
+      sectionHeadingOnClick={() => setIsModalOpen(true)} // <-- Zmienione na otwarcie modala
       topText={"system zarządzania"}
     >
       <div className="flex flex-col gap-8">
@@ -118,6 +120,14 @@ export default function Cars() {
           />
         </div>
       </div>
+
+      {/* Renderowanie modala */}
+      {isModalOpen && (
+        <AddCarModal
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={() => setRefreshKey(refreshKey + 1)}
+        />
+      )}
     </AdminPanelSection>
   );
 }

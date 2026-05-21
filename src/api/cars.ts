@@ -110,3 +110,23 @@ export const deleteCar = async (carId: number): Promise<boolean> => {
   }
   return true;
 };
+
+export const addCar = async (carData: {
+  brand: string;
+  model: string;
+  body_type: string;
+  fuel_type: string;
+  price: number;
+  image_url: string;
+}): Promise<boolean> => {
+  const { error } = await supabase.from("cars").insert({
+    ...carData,
+    is_rented: false,
+  });
+
+  if (error) {
+    console.error("Błąd podczas dodawania auta:", error);
+    return false;
+  }
+  return true;
+};
