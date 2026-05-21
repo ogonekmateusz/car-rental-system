@@ -28,3 +28,7 @@ export const getUserSession = async () => {
 
   return data.session;
 };
+
+export const logoutUser = async (): Promise<void> => {
+  await supabase.auth.signOut();
+};
