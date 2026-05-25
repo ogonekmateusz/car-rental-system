@@ -5,33 +5,39 @@ import {
   IoCheckmarkOutline,
 } from "react-icons/io5";
 
-interface CarTableFiltersProps {
+interface TableFiltersProps {
+  title: string;
   searchQuery: string;
   onSearchChange: (value: string) => void;
-  availableBodyTypes: string[];
-  selectedBodyType: string | null;
-  onBodyTypeSelect: (type: string | null) => void;
+  searchPlaceholder?: string;
+  filterOptions: string[];
+  selectedFilter: string | null;
+  onFilterSelect: (value: string | null) => void;
+  filterLabel?: string;
 }
 
-export default function CarTableFilters({
+export default function TableFilters({
+  title,
   searchQuery,
   onSearchChange,
-  availableBodyTypes,
-  selectedBodyType,
-  onBodyTypeSelect,
-}: CarTableFiltersProps) {
+  searchPlaceholder = "Szukaj...",
+  filterOptions,
+  selectedFilter,
+  onFilterSelect,
+  filterLabel = "Filtruj",
+}: TableFiltersProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
     <div className="p-5 border-b border-gray-100 flex justify-between items-center gap-4">
-      <h2 className="text-xl font-semibold text-gray-900">Lista Pojazdów</h2>
+      <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
 
       <div className="flex items-center gap-3">
         <div className="relative">
           <IoSearchOutline className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
           <input
             type="text"
-            placeholder="Szukaj modelu..."
+            placeholder={searchPlaceholder}
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50"
@@ -42,13 +48,13 @@ export default function CarTableFilters({
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className={`flex items-center gap-2 px-4 py-2 border rounded-lg text-sm font-medium ${
-              selectedBodyType
+              selectedFilter
                 ? "border-blue-500 bg-blue-50 text-blue-700"
                 : "border-gray-200 text-gray-700"
             }`}
           >
             <IoFilterOutline />
-            {selectedBodyType ? `Filtruj: ${selectedBodyType}` : "Filtruj"}
+            {selectedFilter ? `${filterLabel}: ${selectedFilter}` : filterLabel}
           </button>
 
           {isDropdownOpen && (
@@ -59,33 +65,31 @@ export default function CarTableFilters({
               />
               <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-lg py-1 z-20">
                 <div className="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">
-                  Typ nadwozia
+                  {filterLabel}
                 </div>
-
                 <button
                   onClick={() => {
-                    onBodyTypeSelect(null);
+                    onFilterSelect(null);
                     setIsDropdownOpen(false);
                   }}
                   className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex justify-between items-center"
                 >
                   Wszystkie
-                  {selectedBodyType === null && (
+                  {selectedFilter === null && (
                     <IoCheckmarkOutline className="text-blue-500" />
                   )}
                 </button>
-
-                {availableBodyTypes.map((type) => (
+                {filterOptions.map((option) => (
                   <button
-                    key={type}
+                    key={option}
                     onClick={() => {
-                      onBodyTypeSelect(type);
+                      onFilterSelect(option);
                       setIsDropdownOpen(false);
                     }}
                     className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex justify-between items-center"
                   >
-                    {type}
-                    {selectedBodyType === type && (
+                    {option}
+                    {selectedFilter === option && (
                       <IoCheckmarkOutline className="text-blue-500" />
                     )}
                   </button>
