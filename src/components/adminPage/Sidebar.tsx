@@ -99,7 +99,18 @@ export default function Sidebar() {
       </div>
 
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden h-screen w-64 flex-col justify-between border-r border-zinc-200 bg-white p-5 md:flex">
+      <aside
+        className="
+    hidden md:flex
+    sticky top-0
+    h-screen w-64
+    flex-col justify-between
+    border-r border-zinc-200
+    bg-white
+    p-5
+    overflow-y-auto
+  "
+      >
         <div>
           <div className="mb-10">
             <Logo size={"text-2xl"} />
