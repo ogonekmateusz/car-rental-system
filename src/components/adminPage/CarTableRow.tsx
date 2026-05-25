@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import type { Car } from "../../../types/car.ts";
+import type { Car } from "../../types/car.ts";
 import {
   IoEllipsisHorizontal,
   IoArrowBackOutline,

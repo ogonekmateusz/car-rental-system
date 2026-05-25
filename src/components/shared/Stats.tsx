@@ -7,11 +7,11 @@ interface StatCardProps {
   icon?: React.ReactNode;
 }
 
-interface CarStatsProps {
+interface StatsProps {
   stats: StatCardProps[];
 }
 
-export default function CarStats({ stats }: CarStatsProps) {
+export default function Stats({ stats }: StatsProps) {
   return (
     <section className="mt-15 md:mt-20">
       <Grid cols="grid-cols-1 md:grid-cols-2 lg:grid-cols-4" gap={"gap-10"}>
@@ -31,12 +31,7 @@ export default function CarStats({ stats }: CarStatsProps) {
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon }) => {
   return (
     <div className="w-full bg-white border border-gray-50 rounded-lg shadow-sm p-6 flex flex-col gap-4">
-      {icon && (
-        <div className="text-blue-600 text-2xl" aria-hidden="true">
-          {icon}
-        </div>
-      )}
-
+      {icon && <div className="text-blue-600 text-2xl">{icon}</div>}
       <div className="flex flex-col gap-1">
         <h3 className="text-gray-500 font-medium text-sm tracking-wide uppercase">
           {title}
