@@ -9,6 +9,7 @@ import AdminLoginPage from "../pages/AdminLoginPage.tsx";
 import { getUserSession } from "../api/admin.ts";
 import { useEffect, useState } from "react";
 import Cars from "../sections/adminPage/Cars.tsx";
+import Rentals from "../sections/adminPage/Rentals.tsx";
 
 export default function Router() {
   const [session, setSession] = useState<any>(null);
@@ -69,7 +70,7 @@ export default function Router() {
         >
           <Route index element={<div>dashboard</div>} />
           <Route path="flota" element={<Cars />} />
-          <Route path="wynajmy" element={<div>wynajmy</div>} />
+          <Route path="wynajmy" element={<Rentals />} />
           <Route path="ustawienia" element={<div>Ustawienia</div>} />
         </Route>
       </Routes>
