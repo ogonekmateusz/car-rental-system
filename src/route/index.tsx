@@ -68,10 +68,9 @@ export default function Router() {
           path="/admin"
           element={session ? <AdminPage /> : <Navigate to="/login" replace />}
         >
-          <Route index element={<div>dashboard</div>} />
+          <Route index element={<Navigate to="flota" replace />} />
           <Route path="flota" element={<Cars />} />
           <Route path="wynajmy" element={<Rentals />} />
-          <Route path="ustawienia" element={<div>Ustawienia</div>} />
         </Route>
       </Routes>
     </BrowserRouter>

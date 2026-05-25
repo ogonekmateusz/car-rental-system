@@ -1,9 +1,8 @@
 import { useState } from "react";
 import type { SideBarItem } from "../../types/sideBarItem";
 
-import { MdOutlineDashboard } from "react-icons/md";
 import { FaCar, FaBars } from "react-icons/fa";
-import { CiCalendar, CiSettings } from "react-icons/ci";
+import { CiCalendar } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
 
 import PrimaryButton from "../shared/PrimaryButton";
@@ -25,27 +24,15 @@ export default function Sidebar() {
   const sideBarItems: SideBarItem[] = [
     {
       id: 1,
-      name: "Panel",
-      icon: <MdOutlineDashboard />,
-      href: "/admin",
-    },
-    {
-      id: 2,
       name: "Flota",
       icon: <FaCar />,
       href: "/admin/flota",
     },
     {
-      id: 3,
+      id: 2,
       name: "Wynajmy",
       icon: <CiCalendar />,
       href: "/admin/wynajmy",
-    },
-    {
-      id: 4,
-      name: "Ustawienia",
-      icon: <CiSettings />,
-      href: "/admin/ustawienia",
     },
   ];
 
